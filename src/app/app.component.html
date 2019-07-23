@@ -1,0 +1,54 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div class="container my-5">
+  <h2>
+    Welcome to {{ title }}!
+   </h2>
+  <form>
+    <div class="form-group">
+      <label for="formGroupExampleInput">Enter Todo Item</label>
+      <input [(ngModel)]="itemValue" name="item" type="text" class="form-control" placeholder="Buy beans..">
+    </div>
+    <button [disabled]="!itemValue?.length" (click)="createTodo()" type="button" class="btn btn-primary btn-block">Add
+      Item</button>
+  </form>
+  <div class="todo-list my-5">
+    <h3>Your To-do list: </h3>
+  <ng-template *ngFor="let todo of todos" [ngIf]="!todo.isDone">
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <div class="input-group-text">
+          <input type="checkbox" [(ngModel)]="todo.isDone" (change)="updateTodo(todo)">
+        </div>
+      </div>
+      <input [(ngModel)]="todo.body" [value]="todo.body" type="text" class="form-control">
+      <div class="input-group-append" id="button-addon4">
+        <button (click)="updateTodo(todo)" class="btn btn-success" type="button">
+          <i class="far fa-edit"></i>
+        </button>
+        <button (click)="deleteTodo(todo.sid)" class="btn btn-danger" type="button">
+          <i class="fa fa-trash"></i>
+        </button>
+      </div>
+    </div>
+  </ng-template>
+  </div>
+  <div class="todo-list my-5">
+    <h3>Your Completed To-do(s): </h3>
+    <ng-template  *ngFor="let todo of todos" [ngIf]="todo.isDone">
+      <div  class="input-group mb-3">
+        <div class="input-group-prepend">
+          <div class="input-group-text">
+            <input type="checkbox" [(ngModel)]="todo.isDone" (change)="updateTodo(todo)">
+          </div>
+        </div>
+        <input disabled [(ngModel)]="todo.body" [value]="todo.body" type="text" class="form-control">
+        <div class="input-group-append" id="button-addon4">
+          <button (click)="deleteTodo(todo.sid)" class="btn btn-danger" type="button">
+            <i class="fa fa-trash"></i>
+          </button>
+        </div>
+      </div>
+    </ng-template>
+
+  </div>
+</div>
